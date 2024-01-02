@@ -92,7 +92,7 @@ from pulp import *
 n, p, max_toys = map(int, input().split())
 
 # Initialize the problem
-prob = LpProblem("Maximize Profit", LpMaximize)
+prob = LpProblem("MaximizeProfit", LpMaximize)
 
 # Create a list for toys and their profits and production capacities
 toys = []
