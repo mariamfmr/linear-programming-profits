@@ -130,7 +130,7 @@ for i in toys:
 prob += lpSum([toy_vars[i] for i in toys]) + 3*lpSum([package_vars[i] for i in packages]) <= max_toys, "MaxToys"
 
 # Solve the problem
-prob.solve()
+prob.solve(GLPK(msg=0))
 
 # Print the results
 print(value(prob.objective))
