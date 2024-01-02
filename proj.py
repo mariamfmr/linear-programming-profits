@@ -124,14 +124,13 @@ package_vars = LpVariable.dicts("Package", packages, 0, None, LpInteger)
 prob += lpSum([profits[i]*toy_vars[i] for i in toys]) + lpSum([package_profits[i]*package_vars[i] for i in packages]), "Total Profit"
 
 # Add the constraints to the problem
-# Add the constraints to the problem
 for i in toys:
     prob += toy_vars[i] + lpSum([package_vars[j] for j in packages if i in package_toys[j]]) <= capacities[i], f"Capacity_{i}"
 
 prob += lpSum([toy_vars[i] for i in toys]) + 3*lpSum([package_vars[i] for i in packages]) <= max_toys, "MaxToys"
+
 # Solve the problem
 prob.solve()
 
 # Print the results
-print("Status:", LpStatus[prob.status])
-print("Total Profit can be:", value(prob.objective))
+print(value(prob.objective))
