@@ -1,9 +1,10 @@
 # Max Profit Linear Programming with PuLP
 
 This repository contains a Python implementation of a linear programming model to optimize the production and packaging of toys, along with a version (`max-profit-chrono.py`) that measures the execution time for each input.
-The problem given aims to maximize the profit obtained by producing toys and special packages, restrained by constraints on production capacities and maximum number of toys that can be produced per day. Our solution employs the PuLP library, a Python linear programming API, to calculate the maximum achievable profit.
+The problem given aims to maximize the profit obtained by producing toys and special packages, restrained by constraints on production capacities and maximum number of toys that can be produced per day. 
 Initially, the toys, their profits, and production capacities are organized into a dictionary, representing potential production configurations. Following this organization, linear programming is applied to explore all possible combinations of toy production and packaging, thus obtaining the maximum values of subproblems until reaching a global solution.
-More information on PuLP can be found here (https://pypi.org/project/PuLP/).
+Our solution employs the PuLP library, a Python linear programming API, to calculate the maximum achievable profit, and the GNU Linear Programming Kit (GLPK), a software package intended for solving large-scale linear programming problems.
+More information on PuLP and GLPK can be found here (https://pypi.org/project/PuLP/) and here (https://www.gnu.org/software/glpk/).
 
 ## Getting Started
 
@@ -18,6 +19,18 @@ git clone https://github.com/mariamfmr/linear-programming-profit/
 - Python 3
 - PuLP library
 - GLPK solver
+
+ The PuLP library can be installed with the following command:
+
+```bash
+python -m pip install pulp
+```
+
+The GLPK package can be installed with the following command:
+
+```bash
+sudo apt-get install glpk-utils
+```
 
 ### Build and Run
 
@@ -38,6 +51,12 @@ To check the current python version running, use:
 ```bash
 make checkpy
 ```
+
+To run the script on a specific input file:
+```bash
+python3 max-profit.py < testfile
+```
+
 ### Test Data
 
 The repository includes a total of 14 tests located in the testsTime folder, ranging from simple tests, to larger input ones.
