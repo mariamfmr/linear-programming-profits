@@ -2,7 +2,7 @@
 
 # Define the python command and the script to run
 PYTHON := python3
-SCRIPT := max-profit-chrono.py
+SCRIPT := src/max-profit-chrono.py
 
 # Define the input and output directories
 IN_DIR := testsTime
