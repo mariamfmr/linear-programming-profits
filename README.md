@@ -20,6 +20,12 @@ git clone https://github.com/mariamfmr/linear-programming-profit/
 - PuLP library
 - GLPK solver
 
+ Python3 can be installed with the following command:
+
+```bash
+sudo apt isntall python3-pip
+```
+
  The PuLP library can be installed with the following command:
 
 ```bash
