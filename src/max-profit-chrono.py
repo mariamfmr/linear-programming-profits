@@ -57,5 +57,5 @@ print(value(prob.objective))
 
 # Stop the timer and print the execution time
 end_time = time.time()
-execution_time = (end_time - start_time) * 1000  # Convert to milliseconds
-print(f"Execution time: {round(execution_time)} ms")
+execution_time = (end_time - start_time)  # Convert to milliseconds
+print(f"Execution time: {execution_time:.3f} s")
