@@ -10,6 +10,7 @@
       return -0.5887 + (0.000071791 * X);
     }
 
+    // Adjusts the input to 3N + 2P + 1
     function adjust(X,Y) {
         return 3*X + 2*Y + 1;
     }
@@ -88,6 +89,6 @@
 </head>
 <body>
   <div id="curve_chart" style="width: 900px; height: 500px; position: relative;"></div>
-  <div id="equation">T =  -0.5887 + (0.000071791 * (3N + 2P +1))</div>
+  <div id="equation">T =  -0.5887 + (0.000071791 * (3N + 2P +1), R^2 = 0.96)</div>
 </body>
 </html>
