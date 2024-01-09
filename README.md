@@ -11,7 +11,7 @@ More information on PuLP and GLPK can be found here (https://pypi.org/project/Pu
 Clone the repository to your local machine using the following command in your terminal or command prompt:
 
 ```bash
-git clone https://github.com/mariamfmr/linear-programming-profit/
+git clone https://github.com/mariamfmr/linear-programming-profits/
 ```
 
 ### Prerequisites
