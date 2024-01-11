@@ -86,6 +86,7 @@ To generate additional tests, use the following command:
 - src/max-profit-chrono.py: Algorithm version that measures execution time.
 - src/gen_ubiquity: Auxiliar tool to generate additional test inputs.
 - makefile: Makefile for running (`max-profit-chrono.cpp`) on all the inputs files in testsTime.
+- graph/performance-analysis.html: Performance graphs with regression analysis and a data table showcasing the algorithm's execution time based on input parameters.
 - relatorio.pdf: Document explaining the main problem, summarizing the solution, and drawing conclusions from both practical and theoretical analyses.
 
 ### Conclusion
