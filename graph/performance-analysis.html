@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance Analysis</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+    .graph-container {
+      width: 50%;
+      float: left;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- First Graph -->
+  <div class="graph-container">
+    <div id="graph1" style="width: 100%; height: 500px;"></div>
+    <div id="equation1">T = -0.4617 + (0.0001984 * (N + P), R^2 = 0.96)</div>
+  </div>
+
+  <!-- Second Graph -->
+  <div class="graph-container">
+    <div id="graph2" style="width: 100%; height: 500px;"></div>
+    <div id="equation2">-0.5887 + (0.000071791 * (3N + 2P +1), R^2 = 0.96)</div>
+  </div>
+
+  <style>
+    #data-table {
+      border-collapse: collapse;
+      scale: 0.8;
+      width: 60%; 
+      bottom: 10px;
+      font-family: 'Calibri', sans-serif;
+      margin: 0 auto;
+    }
+  
+    #data-table th, #data-table td {
+      border: 1px solid #ddd;
+      padding: 4px;
+      width: 1%;
+      white-space: nowrap;
+      text-align: center;
+      border-right: 3px solid black;
+      border-left: 3px solid black;
+    }
+  
+    #data-table th {
+      padding-top: 8px; 
+      padding-bottom: 8px;
+      text-align: center;
+      background-color: grey;
+      color: white;
+      border-bottom: 3px solid black;
+      border-left: 3px solid black;  
+      border-right: 3px solid black;  
+    }
+  
+    #data-table {
+      border: 3px solid black;
+    }
+  </style>
+  
+
+<table id="data-table">
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>P</th>
+      <th>N + P</th>
+      <th>3N + 2P + 1</th>
+      <th>Execution time(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  // N, P, N + P, 3N + 2P + 1, Time(s)
+  var data2 = [
+  [1000, 100, 1100, 3201, 0.053],
+  [2000, 200, 2200, 6401, 0.117],
+  [3000, 300, 3300, 9601, 0.207],
+  [4000, 400, 4400, 12801, 0.306],
+  [5000, 500, 5500, 16001, 0.449],
+  [6000, 600, 6600, 19201, 0.593],
+  [7000, 700, 7700, 22401, 0.788],
+  [8000, 800, 8800, 25601, 0.994],
+  [9000, 900, 9900, 28801, 1.224],
+  [10000, 1000, 11000, 32001, 1.528],
+  [11000, 1100, 12100, 35201, 1.741],
+  [12000, 1200, 13200, 38401, 2.075],
+  [13000, 1300, 14300, 41601, 2.429],
+  [14000, 1400, 15400, 44801, 2.791],
+  [15000, 1500, 16500, 48001, 3.120],
+  [16000, 1600, 17600, 51201, 3.390],
+  ];
+
+  var tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+
+  data2.forEach(function(rowData) {
+    var row = document.createElement('tr');
+
+    rowData.forEach(function(cellData) {
+      var cell = document.createElement('td');
+      cell.appendChild(document.createTextNode(cellData));
+      row.appendChild(cell);
+    });
+
+    tableBody.appendChild(row);
+  });
+</script>
+
+  <script type="text/javascript">
+    // Your first chart code here
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart1);
+
+    function drawChart1() {
+      var data1 = google.visualization.arrayToDataTable([
+        ['N+P', 'Time / N+P', 'Regression Line'],
+        [1100, 0.053, regression(1100)],
+        [2200, 0.117, regression(2200)],
+        [3300, 0.207, regression(3300)],
+        [4400, 0.306, regression(4400)],
+        [5500, 0.449, regression(5500)],
+        [6600, 0.593, regression(6600)],
+        [7700, 0.788 , regression(7700)],
+        [8800, 0.994, regression(8800)],
+        [9900, 1.224, regression(9900)],
+        [11000, 1.528, regression(11000)],
+        [12100, 1.741, regression(12100)],
+        [13200, 2.075, regression(13200)],
+        [14300, 2.429, regression(14300)],
+        [15400, 2.791, regression(15400)],
+        [16500, 3.120, regression(16500)],
+        [17600, 3.390, regression(17600)],
+      ]);
+
+      var options1 = {
+        title: 'Algorithm Performance, Time(s) per N+P',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        vAxis: {
+          title: 'Time / N+P (s)',
+          titleTextStyle: {
+            italic: false
+          },
+          viewWindow: {
+            min: -1,
+            max: 6 
+          },
+          format: 'decimal'
+        },
+        hAxis: {
+          title: 'Number of toys(N) + Number of packages(P)',
+          titleTextStyle: {
+            italic: false
+          },
+          viewWindow: {
+            min: -1,
+            max: 18000
+          }
+        },
+        seriesType: 'scatter',
+        series: {
+          0: {pointSize: 2, color: 'green'},  // Time / N+P data series
+          1: {type: 'line'}   // Regression Line data series
+        }
+      };
+
+      var chart1 = new google.visualization.ComboChart(document.getElementById('graph1'));
+      chart1.draw(data1, options1);
+    }
+
+    // Your second chart code here
+    google.charts.setOnLoadCallback(drawChart2);
+
+    function drawChart2() {
+      var data2 = google.visualization.arrayToDataTable([
+        ['3N+2P+1', 'Time / N+P', 'Regression Line'],
+        [adjust(1000,100), 0.053, adjusted_regression(adjust(1000,100))],
+        [adjust(2000,200), 0.117, adjusted_regression(adjust(2000,200))],
+        [adjust(3000,300), 0.207, adjusted_regression(adjust(3000,300))],
+        [adjust(4000,400), 0.306, adjusted_regression(adjust(4000,400))],
+        [adjust(5000,500), 0.449, adjusted_regression(adjust(5000,500))],
+        [adjust(6000,600), 0.593, adjusted_regression(adjust(6000,600))],
+        [adjust(7000,700), 0.788 , adjusted_regression(adjust(7000,700))],
+        [adjust(8000,800), 0.994, adjusted_regression(adjust(8000,800))],
+        [adjust(9000,900), 1.224, adjusted_regression(adjust(9000,900))],
+        [adjust(10000,1000), 1.528, adjusted_regression(adjust(10000,1000))],
+        [adjust(11000,1100), 1.741, adjusted_regression(adjust(11000,1100))],
+        [adjust(12000,1200), 2.075, adjusted_regression(adjust(12000,1200))],
+        [adjust(13000,1300), 2.429, adjusted_regression(adjust(13000,1300))],
+        [adjust(14000,1400), 2.791, adjusted_regression(adjust(14000,1400))],
+        [adjust(15000,1500), 3.120, adjusted_regression(adjust(15000,1500))],
+        [adjust(16000,1600), 3.390, adjusted_regression(adjust(16000,1600))],
+      ]);
+
+      var options2 = {
+        title: 'Algorithm Performance, Time(s) per N + P adjusted to 3N + 2P + 1',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        vAxis: {
+          title: 'Time N+P (s)',
+          titleGap: 0,
+          titleTextStyle: {
+            italic: false
+          },
+          viewWindow: {
+            min: -1,
+            max: 6 
+          },
+          format: 'decimal'
+        },
+        hAxis: {
+          title: 'Input adjusted to 3N + 2P + 1',
+          titleTextStyle: {
+            italic: false
+          },
+          viewWindow: {
+            min: -1,
+            max: 52000
+          }
+        },
+        seriesType: 'scatter',
+        series: {
+          0: {pointSize: 2, color: 'green'},  // Time / 3N + 2P + 1 data series
+          1: {type: 'line'}   // Regression Line data series
+        }
+      };
+
+      var chart2 = new google.visualization.ComboChart(document.getElementById('graph2'));
+      chart2.draw(data2, options2);
+    }
+
+    // Calculates Regression Line
+    function adjusted_regression(X) {
+      return -0.5887 + (0.000071791 * X);
+    }
+
+        // Calculates Regression Line
+    function regression(X) {
+      return -0.4617 + (0.0001984 * X);
+    }
+
+    // Adjusts the input to 3N + 2P + 1
+    function adjust(X, Y) {
+      return 3 * X + 2 * Y + 1;
+    }
+  </script>
+
+<style>
+    #y-axis-title {
+      position: absolute;
+      bottom: 50%;
+      left: 0;
+      transform: rotate(-90deg);
+      transform-origin: left bottom 0;
+      margin-left: -20px;
+      text-align: center;
+    }
+  
+    #equation1 {
+      position: absolute;
+      bottom: 820px;
+      left: 455px;
+      transform: translateX(-50%);
+      background-color: #f8f9fa;
+      padding: 5px;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      color: #333;
+    }
+  
+    #equation2 {
+      position: absolute;
+      bottom: 820px;
+      right: 30px;
+      transform: translateX(-50%);
+      background-color: #f8f9fa;
+      padding: 5px;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      color: #333;
+    }
+  </style>
+  
+
+</body>
+</html>
